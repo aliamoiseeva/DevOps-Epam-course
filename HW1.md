@@ -3,7 +3,7 @@
 ## ex1
 
 ```bash
-[alia2@localhost ~]$ ls /usr/share/man/man*/*config*
+[alia2@localhost ~]$ ls /usr/share/man/man?/*config*
 /usr/share/man/man1/pkg-config.1.gz        /usr/share/man/man8/chkconfig.8.gz
 /usr/share/man/man5/config.5ssl.gz         /usr/share/man/man8/grub2-mkconfig.8.gz
 /usr/share/man/man5/config-util.5.gz       /usr/share/man/man8/iprconfig.8.gz
