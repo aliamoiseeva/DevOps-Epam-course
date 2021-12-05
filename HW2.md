@@ -6,7 +6,8 @@
 
 ```bash
 [alia2@localhost ~]$ man awk
-[alia2@localhost ~]$ man awk | awk '/gawk/ {print $0}' > test.txt
+[alia2@localhost ~]$ cat access.log | grep -Po '\"\s\".*\"$' | grep -Po '[^\"]{1,}' | awk -F '"' '{arr[$1]+=1}END{for (ip in arr) print arr[ip], ip}' | uniq |sort -k1n | tail -n3 | head -n1
+340874 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)
 ```
 
 ## ex2
