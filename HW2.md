@@ -80,24 +80,14 @@ echo "Folders: $folders" >> $a/test.txt
 
 3**. Скрипт принимает любое количество записей в первом файле и обрабатывает их последовательно.
 
-(Сделала как поняла, если требуется, чтобы скрипт выполнял другую задачу, распишите, пожалуйста, что конкретно. Из задания не совсем непонятно.)
-
 ```bash
 #!/bin/bash
 
-a="/home/alia2/new"
-count=1
-while [ -n "$1" ]
+file=$(cat test2.txt)
+read=$(ls -R $file)
+for var in $read
 do
-echo "Parametor #$count = $1" >> $a/test.txt
-count=$[ $count + 1 ]
-shift
+echo "$var"
 done
-
-[alia2@localhost new]$ ./task3*.script1.sh 76 87 67
-[alia2@localhost new]$ cat test.txt
-Parametor #1 = 76
-Parametor #2 = 87
-Parametor #3 = 67
 ```
 
