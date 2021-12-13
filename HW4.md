@@ -111,26 +111,76 @@ share
 #### Ваша задача - завершить настройку директории общего доступа. Директория и всё её содержимое должно принадлежать группе bakerstreet, при этом файлы должны обновляться для чтения и записи для владельца и группы (bakerstreet). У других пользователей не должно быть никаких разрешений. Вам также необходимо предоставить доступы на чтение и запись для группы scotlandyard, за исключением Jones, который может только читать документы.
 
 ```bash
-[alia2@localhost ~]$ sudo chown -R holmes:bakerstreet /share/cases
-[alia2@localhost ~]$ sudo setfacl -R -m d:g:bakerstreet:rwx /share/cases
-[alia2@localhost ~]$ sudo setfacl -m d:g:scotlandyard:rwx /share/cases
-[alia2@localhost ~]$ sudo setfacl -m d:u:jones:r-x /share/cases
+[alia2@localhost /]$ sudo chown -R :bakerstreet /share/cases
+[alia2@localhost ~]$ sudo setfacl -m g:bakerstreet:rwx /share/cases
+[alia2@localhost ~]$ sudo setfacl -m g:scotlandyard:rwx /share/cases
+[alia2@localhost ~]$ sudo setfacl -m u:jones:r-x /share/cases
+[alia2@localhost ~]$ sudo setfacl -m o::--- /share/cases/
 [alia2@localhost /]$ getfacl /share/cases
 # file: /share/cases
-# owner: holmes
+# owner: root
 # group: bakerstreet
-# flags: ss-
-user::rw-
-user:jones:r--
-group::rw-
-group:scotlandyard:rw-
-mask::rw-
+user::rwx
+user:jones:r-x
+group::r-x
+group:bakerstreet:rwx
+group:scotlandyard:rwx
+mask::rwx
 other::---
-default:user::rw-
-default:user:jones:r-x
-default:group::rw-
-default:group:bakerstreet:rwx
-default:group:scotlandyard:rwx
-default:mask::rwx
+default:user::rwx
+default:group::r-x
 default:other::---
+
+Пытаюсь посмотреть содержимое директории /share/cases под пользователем holmes:
+
+```bash
+[alia2@localhost ~]$ su - holmes
+[holmes@localhost alia2]$ cd /share/cases
+'''
+
+Попробую посмотреть файл moriarty
+
+```bash
+[holmes@localhost cases]$ vi moriarty.txt ## Впишу туда 123
+[holmes@localhost cases]$ cat moriarty.txt
+123
+```
+
+Попробую создать файл за holmes и отредактировать его
+
+```bash
+[holmes@localhost cases]$ vi test ## Впишу туда: 567
+[holmes@localhost cases]$ cat test
+576
+```
+
+watson пользователь обладает аналогичными доступами, что и holmes, тк принадлежит группе bakerstreet
+
+Захожу за lestrade
+
+```bash
+[lestrade@localhost ~]$ cd /share/cases
+[lestrade@localhost cases]$ vi moriarty.txt ## Впишу туда 789
+[lestrade@localhost cases]$ cat moriarty.txt
+123789
+```
+
+Попробую создать файл за lestrade и отредактировать его
+
+```bash
+[lestrade@localhost cases]$ vi test1 ## Впишу туда "hello"
+[lestrade@localhost cases]$ cat test1 
+hello
+```
+gregson пользователь обладает аналогичными доступами, что и lestrade, тк принадлежит группе scotlandyard
+
+Захожу за jones
+
+```bash
+[jones@localhost ~]$ cd /share/cases/
+mariarty.txt  moriarty.txt  murders.txt
+[jones@localhost cases]$ cat moriarty.txt
+123789
+[jones@localhost cases]$ touch 1.txt
+touch: cannot touch ‘1.txt’: Permission denied
 ```
