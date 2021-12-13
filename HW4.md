@@ -79,7 +79,12 @@ eve:x:1011:4000::/home/eve:/bin/bash
 
 ```bash
 [alia2@localhost /]$ sudo mkdir /share /share/cases
-[alia2@localhost ~]$ sudo touch /share/casesmurders.txt /share/casesmoriarty.txt
+[alia2@localhost /]$ sudo touch /share/cases/murders.txt /share/cases/moriarty.txt
+[alia2@localhost /]$ tree share
+share
+└── cases
+    ├── moriarty.txt
+    └── murders.txt
 ```
 
 #### Создайте группу bakerstreet с пользователями holmes, watson.
