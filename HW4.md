@@ -26,11 +26,8 @@ eve:x:1011:4000::/home/eve:/bin/bash
 
 #### Все новые аккаунты должны обязательно менять свои пароли каждый 30 дней.
 
-```bash
-[alia2@localhost ~]$ sudo passwd -x 30 bob
-[alia2@localhost ~]$ sudo passwd -x 30 alice
-[alia2@localhost ~]$ sudo passwd -x 30 eve
-```
+#####Для того, чтобы новые аккаунты обязательно меняли свои пароли каждые 30 дней, я изменила значение PASS_MAX_DAYS на 30 в файле /etc/login.defs
+
 
 #### Новые аккаунты группы sales должны истечь по окончанию 90 дней срока, а bob должен изменять его пароль каждые 15 дней.
 
@@ -81,9 +78,8 @@ eve:x:1011:4000::/home/eve:/bin/bash
 #### От суперпользователя создайте папку /share/cases и создайте внутри 2 файла murders.txt и moriarty.txt.
 
 ```bash
-[alia2@localhost ~]$ sudo mkdir share
-[alia2@localhost ~]$ sudo mkdir share/cases
-[alia2@localhost ~]$ sudo touch share/cases/murders.txt share/cases/moriarty.txt
+[alia2@localhost /]$ sudo mkdir /share /share/cases
+[alia2@localhost ~]$ sudo touch /share/casesmurders.txt /share/casesmoriarty.txt
 ```
 
 #### Создайте группу bakerstreet с пользователями holmes, watson.
@@ -110,12 +106,12 @@ eve:x:1011:4000::/home/eve:/bin/bash
 #### Ваша задача - завершить настройку директории общего доступа. Директория и всё её содержимое должно принадлежать группе bakerstreet, при этом файлы должны обновляться для чтения и записи для владельца и группы (bakerstreet). У других пользователей не должно быть никаких разрешений. Вам также необходимо предоставить доступы на чтение и запись для группы scotlandyard, за исключением Jones, который может только читать документы.
 
 ```bash
-[alia2@localhost ~]$ sudo chown -R holmes:bakerstreet /home/alia2/share/cases
-[alia2@localhost ~]$ sudo setfacl -R -m d:g:bakerstreet:rwx /home/alia2/share/cases/
-[alia2@localhost ~]$ sudo setfacl -m d:g:scotlandyard:rwx /home/alia2/share/cases
-[alia2@localhost ~]$ sudo setfacl -m d:u:jones:r-x /home/alia2/share/cases
-[alia2@localhost /]$ getfacl home/alia2/share/cases/
-# file: home/alia2/share/cases/
+[alia2@localhost ~]$ sudo chown -R holmes:bakerstreet /share/cases
+[alia2@localhost ~]$ sudo setfacl -R -m d:g:bakerstreet:rwx /share/cases
+[alia2@localhost ~]$ sudo setfacl -m d:g:scotlandyard:rwx /share/cases
+[alia2@localhost ~]$ sudo setfacl -m d:u:jones:r-x /share/cases
+[alia2@localhost /]$ getfacl /share/cases
+# file: /share/cases
 # owner: holmes
 # group: bakerstreet
 # flags: ss-
