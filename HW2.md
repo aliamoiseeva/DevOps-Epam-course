@@ -69,13 +69,13 @@ ls -R $a
 ```bash
 #!/bin/bash
 
-a="/home/alia2/new"
-ls -R $a > $a/test.txt
+a=$(cat test2.txt)
+ls -R $a
 files=$(find "$a" -type f | wc -l )
 folders=$(find "$a" -type d | wc -l )
 
-echo "Files: $files" >> $a/test.txt
-echo "Folders: $folders" >> $a/test.txt
+echo "Files: $files"
+echo "Folders: $folders"
 ```
 
 3**. Скрипт принимает любое количество записей в первом файле и обрабатывает их последовательно.
@@ -83,9 +83,8 @@ echo "Folders: $folders" >> $a/test.txt
 ```bash
 #!/bin/bash
 
-file=$(cat test2.txt)
-read=$(ls -R $file)
-for var in $read
+a=$(cat test2.txt)
+for var in $(ls -R $a)
 do
 echo "$var"
 done
