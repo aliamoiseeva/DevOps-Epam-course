@@ -83,10 +83,14 @@ echo "Folders: $folders"
 ```bash
 #!/bin/bash
 
-a=$(cat test2.txt)
-for var in $(ls -R $a)
+for var in $(cat test2.txt)
 do
-echo "$var"
+ls -R $var;
+ls -l $var > test3.txt;
+files=$(cat test3.txt | grep -i "^-" | wc -l);
+folders=$(cat test3.txt | grep -i "^d" | wc -l);
+echo "Files: $files";
+echo "Folders: $folders";
 done
 ```
 
