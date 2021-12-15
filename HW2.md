@@ -61,7 +61,7 @@ fi
 #!/bin/bash
 
 a=$(cat test2.txt)
-ls -R $a
+ls -R $a 
 ```
 
 3*. Скрипт выводит отдельно количество файлов и количество директорий.
@@ -71,9 +71,9 @@ ls -R $a
 
 a=$(cat test2.txt)
 ls -R $a
-files=$(find "$a" -type f | wc -l )
-folders=$(find "$a" -type d | wc -l )
-
+ls -l $a > test3.txt
+files=$(cat test3.txt | grep -i "^-" | wc -l)
+folders=$(cat test3.txt | grep -i "^d" | wc -l)
 echo "Files: $files"
 echo "Folders: $folders"
 ```
