@@ -117,7 +117,6 @@ Persistent=true
 [alia2@localhost ~]$ sudo systemctl start firstd.service
 [alia2@localhost ~]$ sudo systemctl start secondd.service
 [alia2@localhost ~]$ sudo systemctl start secondd.timer
-[alia2@localhost ~]$ sudo systemctl status firstd.service
 [alia2@localhost ~]$ sudo systemctl status firstd.service secondd.service secondd.timer
 ● firstd.service - First daemon
    Loaded: loaded (/etc/systemd/system/firstd.service; static; vendor preset: disabled)
