@@ -75,12 +75,12 @@ sleep 1000000
 [alia2@localhost ~]$ nano /home/alia2/firstd.sh
 [alia2@localhost ~]$ nano /home/alia2/secondd.sh
 [alia2@localhost ~]$ sudo nano /etc/systemd/system/firstd.service
-[Unix]
+[Unit]
 Description=First daemon
 [Service]
 ExecStart=/home/alia2/firstd.sh
 [alia2@localhost ~]$ sudo nano /etc/systemd/system/secondd.service
-[Unix]
+[Unit]
 Description=Second daemon
 [Service]
 Type=oneshot
@@ -91,7 +91,7 @@ ExecStart=/home/alia2/secondd.sh
 
 ```bash
 [alia2@localhost ~]$ sudo nano /etc/systemd/system/secondd.service
-[Unix]
+[Unit]
 Description=Second daemon
 Requires=firstd.service
 After=firstd.service
@@ -104,7 +104,7 @@ ExecStart=/home/alia2/secondd.sh
 
 ```bash
 [alia2@localhost ~]$ sudo nano /etc/systemd/system/secondd.timer
-[Unix]
+[Unit]
 Description=Timer for the secondd.service
 [Service]
 OnCalendar=2019-01-01 00:00
@@ -118,53 +118,27 @@ Persistent=true
 [alia2@localhost ~]$ sudo systemctl start secondd.service
 [alia2@localhost ~]$ sudo systemctl start secondd.timer
 [alia2@localhost ~]$ sudo systemctl status firstd.service
-● firstd.service
+[alia2@localhost ~]$ sudo systemctl status firstd.service secondd.service secondd.timer
+● firstd.service - First daemon
    Loaded: loaded (/etc/systemd/system/firstd.service; static; vendor preset: disabled)
-   Active: inactive (dead)
+   Active: inactive (dead) since Tue 2021-12-21 11:12:21 CST; 17s ago
+  Process: 8342 ExecStart=/home/alia2/firstd.sh (code=exited, status=0/SUCCESS)
+ Main PID: 8342 (code=exited, status=0/SUCCESS)
 
-Dec 16 23:12:23 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:12:23 localhost.localdomain systemd[1]: Started firstd.service.
-Dec 16 23:15:25 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:16:59 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:16:59 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:16:59 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:18:24 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Dec 16 23:18:24 localhost.localdomain systemd[1]: Started firstd.service.
-Dec 16 23:18:49 localhost.localdomain systemd[1]: [/etc/systemd/system/firstd.service:1] Unknown section 'Unix'. ...ing.
-Hint: Some lines were ellipsized, use -l to show in full.
+Dec 21 11:12:11 localhost.localdomain systemd[1]: Started First daemon.
 
-[alia2@localhost ~]$ sudo systemctl status secondd.service
-● secondd.service
+● secondd.service - Second daemon
    Loaded: loaded (/etc/systemd/system/secondd.service; static; vendor preset: disabled)
    Active: inactive (dead)
 
-Dec 16 23:14:52 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:17:16 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:17:16 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:17:19 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:17:19 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:17:19 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:18:31 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Dec 16 23:18:31 localhost.localdomain systemd[1]: Starting secondd.service...
-Dec 16 23:18:31 localhost.localdomain systemd[1]: Started secondd.service.
-Dec 16 23:18:35 localhost.localdomain systemd[1]: [/etc/systemd/system/secondd.service:1] Unknown section 'Unix'....ing.
-Hint: Some lines were ellipsized, use -l to show in full.
+Dec 21 11:12:11 localhost.localdomain systemd[1]: Starting Second daemon...
+Dec 21 11:12:11 localhost.localdomain systemd[1]: Started Second daemon.
 
-[alia2@localhost ~]$ sudo systemctl status secondd.timer
-● secondd.timer
+● secondd.timer - Timer for second daemon
    Loaded: loaded (/etc/systemd/system/secondd.timer; static; vendor preset: disabled)
-   Active: active (elapsed) since Thu 2021-12-16 23:18:35 MSK; 26s ago
+   Active: active (elapsed) since Tue 2021-12-21 11:12:19 CST; 19s ago
 
-Dec 16 23:18:35 localhost.localdomain systemd[1]: Started secondd.timer.
-[alia2@localhost ~]$ sudo systemctl list-timers --all
-NEXT                         LEFT     LAST                         PASSED       UNIT                         ACTIVATES
-n/a                          n/a      Thu 2021-12-16 23:14:52 MSK  4min 52s ago secondd.timer                secondd.ser
-Fri 2021-12-17 23:04:29 MSK  23h left Thu 2021-12-16 23:04:29 MSK  15min ago    systemd-tmpfiles-clean.timer systemd-tmp
-n/a                          n/a      n/a                          n/a          systemd-readahead-done.timer systemd-rea
-
-3 timers listed.
-
-[1]+  Stopped                 sudo systemctl list-timers --all
+Dec 21 11:12:19 localhost.localdomain systemd[1]: Started Timer for second daemon.
 
 [alia2@localhost ~]$ cat /tmp/homework
 1
@@ -173,11 +147,7 @@ n/a                          n/a      n/a                          n/a          
 ### 5. Stop all daemons and timer
 
 ```bash
-[alia2@localhost ~]$ sudo systemctl stop firstd.service
-[alia2@localhost ~]$ sudo systemctl stop secondd.service
-Warning: Stopping secondd.service, but it can still be activated by:
-  secondd.timer
-[alia2@localhost ~]$ sudo systemctl stop secondd.timer
+[alia2@localhost ~]$ sudo systemctl stop firstd.service secondd.service secondd.timer
 ```
 
 ## cron/anacron
