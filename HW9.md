@@ -93,8 +93,8 @@ re size 262144 bytes                                        │Connection to 192
 PS C:\Program Files\PuTTY> .\pscp -l alia2 172.20.10.7:/home/alia2/log.cap D:\
 ```
 
-##### Start SSH session ![start SSH session](https://user-images.githubusercontent.com/95036108/147680087-0123f5cd-16c7-4f21-81fd-7772c9757c2d.PNG)
-##### Final SSH session ![final SSH seccion](https://user-images.githubusercontent.com/95036108/147680324-7bd36a30-d503-4a72-934e-9c38c302d324.PNG)
+##### Start SSH session (establishing a connection) ![start SSH session](https://user-images.githubusercontent.com/95036108/147680087-0123f5cd-16c7-4f21-81fd-7772c9757c2d.PNG)
+##### The end SSH session ![final SSH seccion](https://user-images.githubusercontent.com/95036108/147680324-7bd36a30-d503-4a72-934e-9c38c302d324.PNG)
 
 ### 4. run tcpdump and request any http site in separate session. Find HTTP request and answer packets with ASCII data in it.  Tcpdump command must be as strict as possible to capture only needed packages for this http request.
 
@@ -118,7 +118,7 @@ tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 b
 [alia2@sib-nsit357nb-vm1 ~]$ curl http://cs.mipt.ru/algo/lessons/lab2.html
 ```
 
-#### terminal (Windows)
+#### terminal (Windows PC)
 
 ```bash
 PS C:\Program Files\PuTTY> .\pscp -l alia2 172.20.10.7:/home/alia2/log2.pcap D:\
@@ -126,4 +126,5 @@ alia2@172.20.10.7's password:
 log2.pcap                 | 156 kB | 156.0 kB/s | ETA: 00:00:00 | 100%
 ```
 
-##### HTTP request and answer packets with ASCII data in it ![image](https://user-images.githubusercontent.com/95036108/147682386-58b6797d-90a0-46ab-93c2-5445f93d1313.png)
+##### HTTP request and answer packets with ASCII data in it ![image](https://user-images.githubusercontent.com/95036108/147693188-f1a3fc7c-f080-402a-9f1b-0b7cb2d23095.png)
+
