@@ -36,7 +36,7 @@ NM_CONTROLLED=no
 BOOTPROTO=none
 IPADDR=192.168.122.197
 PREFIX=24
-[alia2@localhost ~]$ reboot
+[alia2@sib-nsit357nb-vm1 ~]$ systemctl restart network
 [alia2@localhost ~]$ ip addr show enp0s8
 3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
     link/ether 08:00:27:b2:db:28 brd ff:ff:ff:ff:ff:ff
@@ -46,7 +46,7 @@ PREFIX=24
        valid_lft 86283sec preferred_lft 86283sec
     inet6 fe80::1dfc:3a01:b4e4:5d6f/64 scope link noprefixroute
        valid_lft forever preferred_lft forever
-[alia2@localhost ~]$ sudo ip addr del 192.168.122.197/24 dev enp0s8
+[alia2@localhost ~]$ sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8:1 # removing all that was added earlier
 [alia2@localhost ~]$  ip addr show enp0s8
 3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
     link/ether 08:00:27:b2:db:28 brd ff:ff:ff:ff:ff:ff
