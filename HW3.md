@@ -10,6 +10,12 @@
 [alia2@localhost ~]$ cat access.log | grep -Po '\"\s\".*\"$' | grep -Po '[^\"]{1,}' | awk -F '"' '{arr[$1]+=1}END{for (ip in arr) print arr[ip], ip}' | uniq |sort -k1n | tail -n3 | head -n1
 340874 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)
 ```
+###### or
+
+```bash
+[alia2@localhost ~]$ awk -F"\"" '{print $6}' access.log | sort | uniq -dc | sort -nr | head -1
+ 340874 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)
+```
 
 ## ex2
 
