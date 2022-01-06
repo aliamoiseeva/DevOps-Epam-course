@@ -273,15 +273,16 @@ Description : This package contains the Extra Packages for Enterprise Linux (EPE
 #### 1. Find all regular files below 100 bytes inside your home directory.
 
 ```bash
-[alia2@localhost ~]$ sudo find /home/alia2 -size -100b -type f
+[alia2@localhost /]$ sudo find /home/alia2 -size -100c -type f
 [sudo] password for alia2:
 /home/alia2/.bash_logout
-/home/alia2/.bash_profile
-/home/alia2/.bashrc
-/home/alia2/.bash_history
-.
-.
-.
+/home/alia2/.ssh/config
+/home/alia2/a
+/home/alia2/temp
+/home/alia2/.local/share/mc/history
+/home/alia2/dz/text.txt
+/home/alia2/hello
+/home/alia2/development/scripts/die
 ```
 
 #### 2. Find an inode number and a hard links count for the root directory. The hard link count should be about 17. Why?
@@ -350,7 +351,7 @@ du: cannot access ‘/proc/2262/fdinfo/3’: No such file or directory
 1.8G    total
 ```
 
-##### df is accounting for all the space allocated for inodes and other administrative overhead, whereas du is just accounting for the space used by the files.
+##### du queries directly for each file found in the partition, and df queries the filesystem
 
 #### 5. Check disk space usage of /var/log directory using ncdu
 
